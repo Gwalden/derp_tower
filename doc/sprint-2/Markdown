@@ -1,0 +1,15 @@
+Ce que l'on a réussi :
+
+Interraction Client/serveur : récupération de la liste des cartes joué.
+Le joueur peut lancer une partie en appuyant sur le bouton : "Lauch"
+Le joueur peut poser une carte en appuyant sur un bouton "go".
+
+Ce que l'on a appris :
+
+Relation serveur/client
+Approfondissement requete ajax de type GET et PUT
+
+Ce que l'on va faire au prochain sprint :
+
+Permettre a l'utilisateur de finir son tour
+Création de compte et ajout dans la BDD
