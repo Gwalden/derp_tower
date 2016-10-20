@@ -11,16 +11,22 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 public class Game {
 	
-	private List<Entity> list = new ArrayList<>();
+	static private List<Entity> list = new ArrayList<>();
 	
 	@GET
 	public List<Entity> getlist(){
-		return this.list;
+		return list;
 	}
 	
 	@PUT
 	public List<Entity> putentity(){
-		this.list.add(new Entity(10, 10));
-		return this.list;
+		for (int i = 0; i < list.size(); i++)
+		{
+			list.get(i).dep();
+			if (list.get(i).getY()>400)
+				list.remove(i);
+		}
+		list.add(new Entity((int)(Math.random()*400)-40,10));
+		return list;
 	}
 }

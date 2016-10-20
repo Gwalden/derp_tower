@@ -4,7 +4,16 @@ public class Entity {
 
 	private int x;
 	private int y;
+	private int dep = 40;
 	
+	public int getDep() {
+		return dep;
+	}
+
+	public void setDep(int dep) {
+		this.dep = dep;
+	}
+
 	public Entity(){
 	}
 	
@@ -25,7 +34,8 @@ public class Entity {
 	public void setY(int y) {
 		this.y = y;
 	}
-	
-	
+	public void dep(){
+		this.y = this.y+this.dep;
+	}
 	
 }

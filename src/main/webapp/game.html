@@ -20,7 +20,7 @@
 </head>
 <body>
 	<button type="submit" id="newturn">GO!!</button>
-	<div>	<canvas id="myCanvas" height="800" widht="800"></canvas>
+	<div>	<canvas id="myCanvas" height="400" width="400"></canvas>
 </div>
 </body>
 <script>
@@ -30,13 +30,21 @@
 	ctx.fillRect(0, 0, canvas.height, canvas.width);
 	
 	$("#newturn").click(function(event){
+		$("#newturn").prop("disabled", true);
 		$.ajax({
 			url:"/v1/game",
 			type: "PUT",
 			dataType: "json",
 			success: function(json){
 				console.log(json);
-			}
+				ctx.fillStyle = "#FF0000";
+				ctx.fillRect(0, 0, canvas.height, canvas.width);
+				for (var k in json){
+					ctx.fillStyle = "black";
+					ctx.fillRect(json[k].x,json[k].y,40,40);
+				}
+				$("#newturn").prop("disabled", false);
+			}		
 		})
 	});
 </script>
