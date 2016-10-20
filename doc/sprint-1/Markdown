@@ -1,0 +1,15 @@
+Ce que l'on a appris:
+
+Pas grand chose, on a réalisé le radiateur d'information
+et réfléchit pour déterminer les User Story ainsi que les 
+points d'efforts. Quelques problèmes à l'importation du 
+projet Maven sur Eclipse. On a créé le bouton pour lancer
+une partie qui affiche une nouvelle page html.
+
+Ce que l'on va faire au prochain sprint:
+
+Connecter le client au serveur. Réfléchir comment dialoguer
+entre le client et le serveur. Lancer une partie, jouer une
+carte et finir le tour du joueur. Début du graphisme des 
+cartes.
+
