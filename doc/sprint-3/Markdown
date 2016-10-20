@@ -1,0 +1,14 @@
+Ce que l'on a réussi :
+
+Début d'animation entre serveur et entity du client
+Plateau de jeu dessiné
+
+
+Ce que l'on a appri :
+
+Basic auth c'est compliqué !
+Connexion simultanée possible avec notre protocole.
+
+Ce que l'on va faire au prochain sprint :
+
+page de log in et connexion au serveur de 2 clients 
