@@ -4,9 +4,10 @@ function hello(){
 
 function getListGame(){
 	$.ajax({
-    	url: "localhost:8080/v1/game",
-    	type: "GET",
+    	url: "localhost:8080/",
+    	type: "POST",
     	dataType : "json",
+        data: $('sub').serialize(),
     	success: function( json ) {
     		console.log(json);
     	},
@@ -23,5 +24,5 @@ function getListGame(){
 }
 
 function affiche(){
-	$('#launch').click(getListGame());
+	$('#launch').appendTo(getListGame());
 }
