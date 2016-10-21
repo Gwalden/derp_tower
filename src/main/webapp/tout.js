@@ -14,6 +14,7 @@ function getListGame(){
 			"email" : $("#usrmail").val(),
         }),
     	success: function( json ) {
+    		$("<p>Vous etes inscris</p>").appendTo('#launch');
     		console.log("USER CREE");
     	},
     	error: function( xhr, status, errorThrown ) {
