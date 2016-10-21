@@ -20,21 +20,9 @@ public class UserResource {
     Logger logger = LoggerFactory.getLogger(UserResource.class);
 
     @POST
-
     public User createUser(User user) {
         int id = users.size();
-        user.setId(id + 1);
-        users.put(user.getId(), user);
         return user;
-    }
-
-    @DELETE
-    @Path("{id}")
-    public Response deleteUser(@PathParam("id") Integer id) {
-        if (users.containsKey(id)) {
-            return Response.accepted().status(Status.ACCEPTED).build();
-        }
-        return Response.accepted().status(Status.NOT_FOUND).build();
     }
 
     protected User find(String name) {
@@ -48,19 +36,6 @@ public class UserResource {
 
     protected User find(int id) {
         return users.get(id);
-    }
-
-    @PUT
-    @Path("{id}")
-    public Response updateUser(@PathParam("id") int id,
-                               User user) {
-        User oldUser = find(id);
-        logger.info("Should update user with id: " + id + " (" + oldUser + ") to " + user);
-        if (user == null) {
-            throw new WebApplicationException(404);
-        }
-        oldUser.setName(user.getName());
-        return Response.status(200).entity(oldUser).build();
     }
 
     @GET

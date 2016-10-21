@@ -4,12 +4,17 @@ function hello(){
 
 function getListGame(){
 	$.ajax({
-    	url: "localhost:8080/",
+    	url: "/v1/userdb",
     	type: "POST",
+    	contentType : 'application/json',
     	dataType : "json",
-        data: $('sub').serialize(),
+    	data : JSON.stringify({
+			"name" : $("#usrlogin").val(),
+			"password" : $("#usrpswd").val(),
+			"email" : $("#usrmail").val(),
+        }),
     	success: function( json ) {
-    		console.log(json);
+    		console.log("USER CREE");
     	},
     	error: function( xhr, status, errorThrown ) {
         alert( "Sorry, there was a problem!" );
@@ -24,5 +29,5 @@ function getListGame(){
 }
 
 function affiche(){
-	$('#launch').appendTo(getListGame());
+	getListGame();
 }
