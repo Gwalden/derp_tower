@@ -12,6 +12,10 @@ import javax.ws.rs.core.MediaType;
 public class Game {
 	
 	static private List<Entity> list = new ArrayList<>();
+
+	public Game(){
+	}
+	
 	
 	@GET
 	public List<Entity> getlist(){
