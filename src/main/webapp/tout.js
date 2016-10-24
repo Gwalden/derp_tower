@@ -14,7 +14,9 @@ function login()
 	        req.setRequestHeader("Authorization", "Basic " + btoa($("#userlogin").val() + ":" + $("#userpswd").val()));
 	       },
 	       success: function (data) {
-	        console.log(data);
+	    	   name = $("#userlogin").val();
+	    	   pswd =  $("#userpswd").val();
+	        askgame();
 	       },
 	       error : function(jqXHR, textStatus, errorThrown) {
 	       			alert('error: ' + textStatus);
@@ -23,13 +25,23 @@ function login()
 	     }
 }
 
+function askgame(){
+	$.ajax({
+		type: "POST",
+		url: "/v1/games",
+		dataType: "json",
+		beforeSend : function(req) {
+			req.setRequestHeader("Authorization", "Basic " + btoa(name + ":" + pswd));
+		},
+	})
+}
 
 
 function hello(){
 	console.log("hello");
 }
 
-function getListGame(){
+function creatUser(){
 	$.ajax({
     	url: "/v1/userdb",
     	type: "POST",
@@ -41,7 +53,7 @@ function getListGame(){
 			"email" : $("#usrmail").val(),
         }),
     	success: function( json ) {
-    		
+    		askgame();
     		console.log(json);
     	},
     	error: function( xhr, status, errorThrown ) {
@@ -54,8 +66,4 @@ function getListGame(){
         	alert( "The request is complete!" );
     	}
 	});
-}
-
-function affiche(){
-	getListGame();
 }

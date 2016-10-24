@@ -1,30 +1,38 @@
 package fr.iutinfo.skeleton.api;
 
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.List;
 
-@Path("/game")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
 public class Game {
 
-	static private int id = 0;
-	static private List<Entity> list_joueur1 = new ArrayList<>();
-	static private List<Entity> list_joueur2 = new ArrayList<>();
-    final static Logger logger = LoggerFactory.getLogger(Game.class);
 	
-	static private List<Entity> list = new ArrayList<>();
+	private int id = 0;
+	private User player1;
+	private User player2;
+	private List<Entity> list_joueur1 = new ArrayList<>();
+	private List<Entity> list_joueur2 = new ArrayList<>();
+	
+	
+	public User getPlayer1() {
+		return player1;
+	}
+
+	public void setPlayer1(User player1) {
+		this.player1 = player1;
+	}
+
+	public User getPlayer2() {
+		return player2;
+	}
+
+	public void setPlayer2(User player2) {
+		this.player2 = player2;
+	}
 
     public Game() {
     }
-	@GET
+    
 	public Game getGame() {
 		return this;
 	}
@@ -45,7 +53,6 @@ public class Game {
 		list_joueur2 = list;
 	}
 
-	@PUT
 	public Game putGame() {
 		this.putEntityJoueur1();
 		this.putEntityJoueur2();
