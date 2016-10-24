@@ -56,9 +56,11 @@ public class Games {
 		User u = (User) context.getUserPrincipal();
 		Game g = null;
 		for (Game lgame : glist) {
-			if (lgame.getPlayer1().getName() == u.getName() || lgame.getPlayer2().getName() == u.getName())
-				g=lgame;
+			if (lgame.getPlayer1().getName().equals(u.getName()) || lgame.getPlayer2().getName().equals(u.getName())) {
+				lgame.nextTurn(u);
+				return lgame;
+			}
 		}
-		return g;
+		throw new WebApplicationException(404);
 	}
 }

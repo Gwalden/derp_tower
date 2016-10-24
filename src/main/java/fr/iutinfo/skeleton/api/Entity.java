@@ -7,10 +7,18 @@ public class Entity {
 	private int y;
 	private int dep = 1;
 	private int att = 1;
+	private int vie = 1;
+	private int cout = 1;
+	private int rAtt = 1;
+	private boolean peutAttaquer = false;
+	
+	
+	
 	public int getAtt() {
 		return att;
 	}
 
+	
 	public void setAtt(int att) {
 		this.att = att;
 	}
@@ -27,9 +35,7 @@ public class Entity {
 		this.vie = vie;
 	}
 
-	private int vie = 1;
-	private int cout = 1;
-	private int rAtt = 1;
+	
 	
 	public Entity(){
 	}
@@ -60,11 +66,32 @@ public class Entity {
 		return this.vie;
 	}
 	
-	public void donneAttaque(Entity e) {
-		if ((this.getX()+rAtt==e.getX() || this.getX()-rAtt==e.getX()) && (this.getY()+rAtt==e.getY() || this.getY()-rAtt==e.getY())) {
+
+	public boolean getPeutAttaquer() {
+		return peutAttaquer;
+	}
+	
+	public void setPeutAttaquer(boolean b) {
+		this.peutAttaquer = b;
+	}
+	
+	public boolean donneAttaque(Entity e) {
+		if ((this.getX()==e.getX() &&  (this.getY()+rAtt==e.getY() || this.getY()-rAtt==e.getY() || this.getY()==e.getY())) || (this.getY()==e.getY() &&  (this.getX()+rAtt==e.getX() || this.getX()-rAtt==e.getX() || this.getX()==e.getX()))) {
 			e.perdVie(this.att);
+			this.peutAttaquer = true;
+		}
+		return this.peutAttaquer;
+	}
+	
+	
+	public boolean estMort() {
+		if (vie <= 0) {
+			return true;
+		} else {
+			return false;
 		}
 	}
+	
 	
 	public int getX() {
 		return x;

@@ -128,4 +128,51 @@ public class Game {
 			}
 		}
 	}
+	
+	public void nextTurn(User user) {
+		this.nettoyerTroupes();
+		this.commencerCombat();
+		this.nettoyerTroupes();
+
+		if (user.getName().equals(this.player1.getName())) {
+			this.putEntityJoueur1();
+
+		}
+		else if (user.getName().equals(this.player2.getName())) {
+			this.putEntityJoueur2();
+		}
+		this.nettoyerTroupes();
+		this.deplacerEntityJoueur1();
+		this.deplacerEntityJoueur2();
+		this.nettoyerTroupes();
+	}
+	
+	
+	public void commencerCombat() {
+		for (int i=0;i<list_joueur1.size();i++) {
+			for (int j=0;j<list_joueur2.size();j++) {
+				list_joueur1.get(i).donneAttaque(list_joueur2.get(j));
+			}
+		}
+
+		for (int i=0;i<list_joueur2.size();i++) {
+			for (int j=0;j<list_joueur1.size();j++) {
+				list_joueur2.get(i).donneAttaque(list_joueur1.get(j));
+			}
+		}
+	}
+
+	public void nettoyerTroupes() {
+		for (int i=0;i<list_joueur1.size();i++) {
+			if (list_joueur1.get(i).estMort() == true) {
+				list_joueur1.remove(i);
+			}
+		}
+		for (int j=0;j<list_joueur2.size();j++) {
+			if (list_joueur2.get(j).estMort() == true) {
+				list_joueur2.remove(j);
+			}
+		}
+	}
+
 }

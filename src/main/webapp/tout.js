@@ -68,12 +68,31 @@ function getGame(){
 		},
 		dataType: "json",
 	      success: function(json){
-	    	  console.log("GETGAME OK");
-	    	  //afficher htmlmll
-	    	  window.location.href="toto.html"
+	    	  if(premierTour == 0){
+	              console.log("premier tour");
+	              console.log(json);
+	              premierTour++;
+	              majListe(json);
+	              draw();
+	              $('#newturn').prop('disabled', false);
+	              
+	            }else{
+
+	              animate(json);
+
+	              setTimeout(function(){
+
+	                majListe(json);
+	                draw();
+	                num=0;
+	                $('#newturn').prop('disabled', false);
+
+	              }, 1000)};
+    	  setTimeout(function(){getGame();}, 1000);
+	    	  
 	      },
 	      error: function() {
-	    	  setTimeout(function(){getGame();}, 2000);	    	  
+	    	  setTimeout(function(){getGame();}, 1000);	    	  
 	      }
 	})
 }

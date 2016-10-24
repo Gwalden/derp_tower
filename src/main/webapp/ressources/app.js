@@ -25,11 +25,15 @@ $("#newturn").click(function(event){
       url: "/v1/games",
       type: "PUT",
       dataType: "json",
+      beforeSend : function(req) {
+			req.setRequestHeader("Authorization", "Basic " + btoa(name + ":" + pswd));
+		},
       success: function(json){
         console.log(json);
         $('#newturn').prop('disabled', true);
         if(premierTour == 0){
           console.log("premier tour");
+          console.log(json);
           premierTour++;
           majListe(json);
           draw();
