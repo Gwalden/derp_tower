@@ -35,13 +35,6 @@ public class userDBResourceTest extends JerseyTest {
     }
 
     @Test
-    public void read_user_should_return_good_alias() {
-        h.createUserWithAlias("richard stallman", "rms");
-        User user = target("/userdb/richard stallman").request().get(User.class);
-        assertEquals("rms", user.getAlias());
-    }
-
-    @Test
     public void read_user_should_return_good_email() {
         h.createUserWithEmail("Ian Murdock", "ian@debian.org");
         User user = target("/userdb/Ian Murdock").request().get(User.class);

@@ -7,7 +7,7 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 import java.util.List;
 
 public interface UserDao {
-	@SqlUpdate("create table users (name varchar(20) primary key UNIQUE, password varchar(100), email varchar(100))")
+	@SqlUpdate("create table users (id integer primary key autoincrement ,name varchar(20) UNIQUE, password varchar(100), email varchar(100))")
 	void createUserTable();
 
 	@SqlUpdate("insert into users (name,password,email) values (:name, :password, :email)")
@@ -21,7 +21,7 @@ public interface UserDao {
 	@SqlUpdate("drop table if exists users")
 	void dropUserTable(); 
 
-	@SqlQuery("select * from users order by id")
+	@SqlQuery("select * from users")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	List<User> all();
 

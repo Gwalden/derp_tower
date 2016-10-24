@@ -11,7 +11,8 @@ import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 @ApplicationPath("/v1/")
 public class Api extends ResourceConfig {
 
-    public Api() {
+
+	public Api() {
         packages("fr.iutinfo.skeleton.api");
         //register(LoggingFilter.class);
         register(AuthFilter.class);

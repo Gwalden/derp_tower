@@ -23,5 +23,4 @@ public class SecureDto {
     public User getCurrentUser() {
         return currentUser;
     }
-
 }

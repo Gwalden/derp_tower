@@ -4,7 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.SecurityContext;
+
 import java.util.List;
 
 @Path("/userdb")
@@ -24,6 +27,16 @@ public class UserDBResource {
 		}
 	}
 	
+    
+    @GET
+    @Path("/login")
+    public User logIn(@Context SecurityContext context)
+    {
+    	User user = (User) context.getUserPrincipal();
+    	if (user.getId() == -1)
+    		return null;
+		return user;
+    }
 	@POST
 	public User createUser(User user) {
         int id = dao.insert(user);
@@ -41,7 +54,7 @@ public class UserDBResource {
 	}
 
 	@GET
-	public List<User> getAllUsers() {
+	public List<User> getAllUsers() {		
 		return dao.all();
 	}
 }
