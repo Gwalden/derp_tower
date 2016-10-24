@@ -3,6 +3,7 @@ package fr.iutinfo.skeleton.api;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Game {
 
@@ -10,6 +11,7 @@ public class Game {
 	private int id = 0;
 	private User player1;
 	private User player2;
+	private User turn;
 	private List<Entity> list_joueur1 = new ArrayList<>();
 	private List<Entity> list_joueur2 = new ArrayList<>();
 	
@@ -59,16 +61,10 @@ public class Game {
 		list_joueur2 = list;
 	}
 
-	public Game putGame() {
-		this.putEntityJoueur1();
-		this.putEntityJoueur2();
-		this.deplacerEntityJoueur1();
-		this.deplacerEntityJoueur2();
-		return this;
-	}
 	
 	public void putEntityJoueur1() {
-		int r = (int)(Math.random()*4);
+		Random ra = new Random();
+		int r = ra.nextInt(4)+1;
 		if (r==1) {
 			list_joueur1.add(new Entity(2,3,id));
 		} else if (r==2) {
@@ -82,7 +78,8 @@ public class Game {
 	}
 
 	public void putEntityJoueur2() {
-		int r = (int)(Math.random()*4);
+		Random ra = new Random();
+		int r = ra.nextInt(4)+1;
 		if (r==1) {
 			list_joueur2.add(new Entity(2,13,id));
 		} else if (r==2) {
@@ -93,6 +90,14 @@ public class Game {
 			list_joueur2.add(new Entity(9,13,id));
 		}
 		id++;
+	}
+
+	public User getTurn() {
+		return turn;
+	}
+
+	public void setTurn(User turn) {
+		this.turn = turn;
 	}
 
 	public void deplacerEntityJoueur1() {
@@ -136,14 +141,15 @@ public class Game {
 
 		if (user.getName().equals(this.player1.getName())) {
 			this.putEntityJoueur1();
-
+			this.setTurn(this.player2);
+			this.deplacerEntityJoueur2();
 		}
 		else if (user.getName().equals(this.player2.getName())) {
 			this.putEntityJoueur2();
+			this.deplacerEntityJoueur1();
+			this.setTurn(this.player1);
 		}
 		this.nettoyerTroupes();
-		this.deplacerEntityJoueur1();
-		this.deplacerEntityJoueur2();
 		this.nettoyerTroupes();
 	}
 	

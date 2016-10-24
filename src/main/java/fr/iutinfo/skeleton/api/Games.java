@@ -3,7 +3,6 @@ package fr.iutinfo.skeleton.api;
 import java.util.List;
 import java.util.ArrayList;
 
-import javax.inject.Singleton;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -44,6 +43,7 @@ public class Games {
 			Game gamec = new Game();
 			gamec.setPlayer1(ulist.get(0));
 			gamec.setPlayer2(ulist.get(1));
+			gamec.setTurn(ulist.get(0));
 			ulist.remove(1);
 			ulist.remove(0);
 			glist.add(gamec);
@@ -54,10 +54,10 @@ public class Games {
 	@PUT
 	public Game playGame(@Context SecurityContext context){
 		User u = (User) context.getUserPrincipal();
-		Game g = null;
 		for (Game lgame : glist) {
 			if (lgame.getPlayer1().getName().equals(u.getName()) || lgame.getPlayer2().getName().equals(u.getName())) {
-				lgame.nextTurn(u);
+				if (lgame.getTurn().getName().equals(u.getName()))
+					lgame.nextTurn(u);
 				return lgame;
 			}
 		}
