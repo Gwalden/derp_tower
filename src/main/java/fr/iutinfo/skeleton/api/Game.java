@@ -14,16 +14,17 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class Game {
+<<<<<<< HEAD
 
 	static private int id = 0;
 	static private List<Entity> list_joueur1 = new ArrayList<>();
 	static private List<Entity> list_joueur2 = new ArrayList<>();
     final static Logger logger = LoggerFactory.getLogger(Game.class);
+	
+	static private List<Entity> list = new ArrayList<>();
 
-
-	public Game(){
-	}
-
+    public Game() {
+    }
 	@GET
 	public Game getGame() {
 		return this;

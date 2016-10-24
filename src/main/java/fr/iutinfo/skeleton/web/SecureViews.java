@@ -37,15 +37,9 @@ public class SecureViews {
     public User login(@Context SecurityContext context, @QueryParam("user") String oldLogin, @Context UriInfo uriInfo) throws URISyntaxException {
         User currentUser = (User) context.getUserPrincipal();
         User oldUser = dao.findByName(oldLogin);
-        if (oldUser == null) {
-            oldUser = User.getAnonymousUser();
-        }
         logger.debug("User - current : " + currentUser.toString() + ", old : " + oldUser.toString());
-        if (currentUser.getId() == oldUser.getId()) {
-            requestLoginForm();
-        } else {
             setCookieAndRedirectToUserDetail(currentUser, uriInfo);
-        }
+        
         return null;
     }
 
@@ -57,7 +51,7 @@ public class SecureViews {
     }
 
     private void setCookieAndRedirectToUserDetail(User currentUser, UriInfo uriInfo) throws URISyntaxException {
-        URI location = UriBuilder.fromResource(UserViews.class).path("/" + currentUser.getId()).build();
+        URI location = UriBuilder.fromResource(UserViews.class).path("/" + currentUser.getName()).build();
         logger.debug("Redirect to " + location);
         throw new WebApplicationException(Response
                 .temporaryRedirect(location)

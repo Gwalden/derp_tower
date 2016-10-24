@@ -19,32 +19,35 @@
 <script src="all.js"></script>
 </head>
 <body>
-	<button type="submit" id="newturn">GO!!</button>
-	<div>	<canvas id="myCanvas" height="400" width="400"></canvas>
-</div>
+	<center>
+		<button type="submit" id="newturn">GO!!</button>
+		<div>
+			<canvas id="myCanvas" height="400" width="400"></canvas>
+		</div>
+	</center>
 </body>
 <script>
 	var canvas = document.getElementById("myCanvas");
 	var ctx = canvas.getContext("2d");
 	ctx.fillStyle = "#FF0000";
 	ctx.fillRect(0, 0, canvas.height, canvas.width);
-	
-	$("#newturn").click(function(event){
+
+	$("#newturn").click(function(event) {
 		$("#newturn").prop("disabled", true);
 		$.ajax({
-			url:"/v1/game",
-			type: "PUT",
-			dataType: "json",
-			success: function(json){
+			url : "/v1/game",
+			type : "PUT",
+			dataType : "json",
+			success : function(json) {
 				console.log(json);
 				ctx.fillStyle = "#FF0000";
 				ctx.fillRect(0, 0, canvas.height, canvas.width);
-				for (var k in json){
+				for ( var k in json) {
 					ctx.fillStyle = "black";
-					ctx.fillRect(json[k].x,json[k].y,40,40);
+					ctx.fillRect(json[k].x, json[k].y, 40, 40);
 				}
 				$("#newturn").prop("disabled", false);
-			}		
+			}
 		})
 	});
 </script>

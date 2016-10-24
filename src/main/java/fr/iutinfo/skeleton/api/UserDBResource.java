@@ -18,17 +18,15 @@ public class UserDBResource {
     public UserDBResource() {
 		try {
 			dao.createUserTable();
-			dao.insert(new User(0,"Margaret Thatcher", "la Dame de fer"));
+			dao.insert(new User("Mathuidi","123456","Mathuidi@Charo"));
 		} catch (Exception e) {
-			System.out.println("Table déjà là !");
+			System.out.println("Table déjà là ! " + e.getMessage());
 		}
 	}
 	
 	@POST
 	public User createUser(User user) {
-        user.resetPasswordHash();
         int id = dao.insert(user);
-        user.setId(id);
 		return user;
 	}
 
@@ -46,6 +44,5 @@ public class UserDBResource {
 	public List<User> getAllUsers() {
 		return dao.all();
 	}
-
 }
 
