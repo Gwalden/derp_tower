@@ -10,7 +10,13 @@ import java.security.Principal;
 import java.security.SecureRandom;
 
 public class User implements Principal {
-    final static Logger logger = LoggerFactory.getLogger(User.class);
+    @Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", salt=" + salt
+				+ ", passwdHash=" + passwdHash + "]";
+	}
+
+	final static Logger logger = LoggerFactory.getLogger(User.class);
 
     private int id = 0;
     private String name;

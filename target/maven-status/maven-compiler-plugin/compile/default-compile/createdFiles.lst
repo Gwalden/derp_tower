@@ -6,6 +6,7 @@ fr/iutinfo/skeleton/web/Hello.class
 fr/iutinfo/skeleton/web/SecureViews.class
 fr/iutinfo/skeleton/web/WebConfig.class
 fr/iutinfo/skeleton/api/User.class
+fr/iutinfo/skeleton/api/Games.class
 fr/iutinfo/skeleton/api/UserDao.class
 fr/iutinfo/skeleton/utils/RestClient.class
 fr/iutinfo/skeleton/auth/BasicAuth.class

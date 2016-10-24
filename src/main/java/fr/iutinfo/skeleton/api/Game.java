@@ -14,6 +14,12 @@ public class Game {
 	private List<Entity> list_joueur2 = new ArrayList<>();
 	
 	
+	@Override
+	public String toString() {
+		return "Game [id=" + id + ", player1=" + player1 + ", player2=" + player2 + ", list_joueur1=" + list_joueur1
+				+ ", list_joueur2=" + list_joueur2 + "]";
+	}
+
 	public User getPlayer1() {
 		return player1;
 	}

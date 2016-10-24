@@ -22,7 +22,7 @@ var num = 0;
 $("#newturn").click(function(event){
     //$("#newturn").prop("disabled", true);
     $.ajax({
-      url:"/v1/game",
+      url: "/v1/games",
       type: "PUT",
       dataType: "json",
       success: function(json){
@@ -34,7 +34,7 @@ $("#newturn").click(function(event){
           majListe(json);
           draw();
           $('#newturn').prop('disabled', false);
-
+          
         }else{
 
           animate(json);
@@ -80,8 +80,6 @@ function animate(json){
       TweenLite.to(liste2[i], 1, {X: (json.list_joueur2[unite].x-1)*41, Y: (json.list_joueur2[unite].y-1)*41, sprites: 6, onUpdate:draw});
     }  
   }
-
-
 }
 
 
