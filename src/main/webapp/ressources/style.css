@@ -1,0 +1,15 @@
+body{
+	background-image:url('239.jpg');
+	background-size:100% 100%;
+	color:lightgrey;
+	font-family:arial;
+}
+
+.plat{
+	background-image:url('map_verticale.png');
+	border:10px solid #2E2E2E;
+}
+
+.bouton{
+	width:300px;
+}
