@@ -16,23 +16,26 @@ public class Games {
 
 	private static List<Game>glist = new ArrayList<>();
 	private static List<User>ulist = new ArrayList<>();
-    final static Logger logger = LoggerFactory.getLogger(User.class);
+	final static Logger logger = LoggerFactory.getLogger(User.class);
 
-	
-	
+
+
 	@GET
 	public Game getGame(@Context SecurityContext context){
 		User u = (User) context.getUserPrincipal();
 		logger.debug(u.toString());
 
-		for (Game lgame : glist) {
-			if (lgame.getPlayer1().getName().equals( u.getName()) || lgame.getPlayer2().getName().equals( u.getName()))
-				return lgame;
+		for (int i=0;i<glist.size();i++) {
+			if (glist.get(i).getPlayer1().getName().equals( u.getName()) || glist.get(i).getPlayer2().getName().equals( u.getName())) {
+				if (glist.get(i).getWinner() != null)
+					glist.remove(i);
+				return glist.get(i);
+			}
 		}
 		throw new WebApplicationException(404);
 	}
-	
-	
+
+
 	@POST
 	public void creatGame(@Context SecurityContext context){
 		User u = (User) context.getUserPrincipal();
@@ -50,7 +53,7 @@ public class Games {
 		}
 		logger.debug("GLIST :     "+ glist.toString());
 	}
-	
+
 	@PUT
 	public Game playGame(@Context SecurityContext context){
 		User u = (User) context.getUserPrincipal();
