@@ -14,7 +14,6 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class Game {
-<<<<<<< HEAD
 
 	static private int id = 0;
 	static private List<Entity> list_joueur1 = new ArrayList<>();
