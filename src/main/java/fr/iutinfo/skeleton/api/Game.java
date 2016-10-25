@@ -94,8 +94,8 @@ public class Game {
 			e = new Gorrok(l,c,id);
 		else if (type == 1)
 			 e = new Hydrea(l,c,id);
-		if (this.getMana2()-e.getCout()>=0) {
-			this.setMana1(this.getMana2()-e.getCout());
+		if (this.getMana1()-e.getCout()>=0) {
+			this.setMana1(this.getMana1()-e.getCout());
 			list_joueur1.add(e);
 		}
 		id++;
