@@ -1,12 +1,12 @@
 package fr.iutinfo.skeleton.api;
 
 public class Derp extends Entity {
-	final int type = 3;
 	
 	public Derp(){
 	}
 
 	public Derp(int x, int y, int id){
+		this.type = 3;
 		this.x = x;
 		this.y = y;
 		this.id = id;

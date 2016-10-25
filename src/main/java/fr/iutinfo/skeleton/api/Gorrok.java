@@ -1,12 +1,12 @@
 package fr.iutinfo.skeleton.api;
 
 public class Gorrok extends Entity{
-	final int type = 4;
 	
 	public Gorrok(){
 	}
 
 	public Gorrok(int x, int y, int id){
+		this.type = 4;
 		this.x = x;
 		this.y = y;
 		this.id = id;

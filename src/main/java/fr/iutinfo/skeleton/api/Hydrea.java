@@ -1,12 +1,12 @@
 package fr.iutinfo.skeleton.api;
 
 public class Hydrea extends Entity {
-	final int type = 1;
 	
 	public Hydrea(){
 	}
 
 	public Hydrea(int x, int y, int id){
+		this.type = 1;
 		this.x = x;
 		this.y = y;
 		this.id = id;

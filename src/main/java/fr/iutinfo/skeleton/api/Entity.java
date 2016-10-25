@@ -2,6 +2,7 @@ package fr.iutinfo.skeleton.api;
 
 public abstract class Entity {
 
+	protected int type = 0; 
 	protected int id;
 	protected int x;
 	protected int y;
