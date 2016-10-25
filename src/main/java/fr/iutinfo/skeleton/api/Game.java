@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 public class Game {
 
+	private double manMax = 1;	
 	private int mana1 = 0;
 	private int mana2 = 0;
 	private int score1 = 0;
@@ -209,7 +210,7 @@ public class Game {
 
 		if (user.getName().equals(this.player1.getName())) {
 			this.putEntityJoueur1(action.getChamp(), action.getLane());
-			this.setMana2(this.getMana2()+1);
+			this.setMana2((int)this.manMax);
 			this.setTurn(this.player2);
 			this.deplacerEntityJoueur2();
 			this.ajouterScore2();
@@ -217,12 +218,14 @@ public class Game {
 		}
 		else if (user.getName().equals(this.player2.getName())) {
 			this.putEntityJoueur2(action.getChamp(), action.getLane());
-			this.setMana1(this.getMana1()+1);
+			this.setMana1((int) this.manMax);
 			this.setTurn(this.player1);
 			this.deplacerEntityJoueur1();
 			this.ajouterScore1();
 			logger.debug("Score 1 = "+score1);
 		}
+		if (manMax <= 5) 
+			this.setManMax(this.getManMax()+0.2);
 		this.nettoyerTroupes();
 		this.finDeGame();
 		this.nettoyerTroupes();
@@ -242,6 +245,15 @@ public class Game {
 		} else if (this.getScore2()==2) {
 			this.winner = player2;
 		}
+	}
+
+
+	public double getManMax() {
+		return manMax;
+	}
+
+	public void setManMax(double manMax) {
+		this.manMax = manMax;
 	}
 	
 	public int getMana1() {

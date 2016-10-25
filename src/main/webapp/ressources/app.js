@@ -1,42 +1,51 @@
 console.log("restart from scratch");
 var champion=null;
+var premierTour=0;
 $(document).ready(function(){
+
+
+
   $('#game').hide();
 
   $('#hydrea').click(function(){
     hideBordersCards();
-    champion="hydrea";
+    champion=1;
     $('#infos').html("Voici le super champion hydrea");
     $('#hydrea').css("border","1px solid white");
+    $('#visu').html("<img src='ressources/pions/hydrea.png' class='visu'>");
 
   });
 
   $('#battler').click(function(){
     hideBordersCards();
-    champion="battler";
+    champion=2;
     $('#infos').html("Voici le super champion battler");
     $('#battler').css("border","1px solid white");
+    $('#visu').html("<img src='ressources/pions/battler.png' class='visu'>");
   });
 
   $('#derp').click(function(){
     hideBordersCards();
-    champion="derp";
+    champion=3;
     $('#infos').html("Voici le super champion derp");
     $('#derp').css("border","1px solid white");
+    $('#visu').html("<img src='ressources/pions/derp.png' class='visu'>");
   });
 
   $('#gorrok').click(function(){
     hideBordersCards();
-    champion="gorrok";
+    champion=4;
     $('#infos').html("Voici le super champion gorrok");
     $('#gorrok').css("border","1px solid white");
+    $('#visu').html("<img src='ressources/pions/gorrok.png' class='visu'>");
   });
 
   $('#naksian').click(function(){
     hideBordersCards();
-    champion="naksian";
+    champion=5;
     $('#infos').html("Voici le super champion naksian");
     $('#naksian').css("border","1px solid white");
+    $('#visu').html("<img src='ressources/pions/naksian.png' class='visu'>");
   });
 
   $('#l').click(function(){
@@ -107,67 +116,45 @@ function poserChamp(champion,lane){
           }, 1000);
         }
       }   
-    })
-
+    });
   }
 }
 
+function majManaScor(json){
+  if(name == json.player1.name){
+    $("#mana").html("Vous : "+json.mana1+"<br>J2 : "+json.mana2);
+    $("#score").html("Vous : "+json.score1+"<br>J2 : "+json.score2);
+  }else{
+    $("#mana").html("J1 : "+json.mana1+"<br>Vous : "+json.mana2);
+    $("#score").html("J1 : "+json.score1+"<br>Vous : "+json.score2);
+  }
+  
+}
+
+
 //unite
-var unite = function(posX,posY,ID){this.X = posX;this.Y=posY;this.Id=ID,sprites=6}
+var unite = function(posX,posY,ID,t,pv){this.X = posX;this.Y=posY;this.Id=ID,this.type=t,this.vie=pv}
 
 //variables
 var liste1 = [];
 var liste2 = [];
-var premierTour = 0;
 
 //recuperation des éléments du canvas (a caler dans le document.ready)
 var canvas =  document.getElementById("plat");
 var ctx = canvas.getContext("2d");
 ctx.fillStyle="#FE2E2E";
 
-//sprite
-var sprite = new Image();
-sprite.src = "ressources/sprites.png";
-var num = 0;
-
-//requête
-$("#newturn").click(function(event){
-    //$("#newturn").prop("disabled", true);
-    $.ajax({
-      url: "/v1/games",
-      type: "PUT",
-      dataType: "json",
-      beforeSend : function(req) {
-			req.setRequestHeader("Authorization", "Basic " + btoa(name + ":" + pswd));
-		},
-      success: function(json){
-        console.log(json);
-        $('#newturn').prop('disabled', true);
-        if(premierTour == 0){
-          console.log("premier tour");
-          console.log(json);
-          premierTour++;
-          majListe(json);
-          draw();
-          $('#newturn').prop('disabled', false);
-          
-        }else{
-
-          animate(json);
-
-          setTimeout(function(){
-
-            majListe(json);
-            draw();
-            num=0;
-            $('#newturn').prop('disabled', false);
-
-          }, 1000);
-        }
-      }   
-    })
-});
-
+//images
+var sprit1 =  new Image();
+var sprit2 =  new Image();
+var sprit3 =  new Image();
+var sprit4 =  new Image();
+var sprit5 =  new Image();
+sprit1.src = "ressources/pions/hydrea.png";
+sprit2.src = "ressources/pions/battler.png";
+sprit3.src = "ressources/pions/derp.png";
+sprit4.src = "ressources/pions/gorrok.png";
+sprit5.src = "ressources/pions/naksian.png";
 
 //animation
 function animate(json){
@@ -205,36 +192,48 @@ function draw(){
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   console.log("draw");
 
-  var s;//sprites
+  var type;//sprites
 
   //joueur 1
   for (var i = 0; i < liste1.length; i++) {
-    s =  liste1[i].sprites;
-    if(s < 2){
-      ctx.drawImage(sprite,0,0,32,32,liste1[i].X, liste1[i].Y, 32, 32);
-    }else if(s >=2 && s<4){
-      ctx.drawImage(sprite,32,0,32,32,liste1[i].X, liste1[i].Y, 32, 32);
-    }else if(s >= 4 && s<=6){
-      ctx.drawImage(sprite,64,0,32,32,liste1[i].X, liste1[i].Y, 32, 32);
+    type = liste1[i].type;
+    if(type == 1){
+      console.log("JE SUIS LA");
+      ctx.drawImage(sprit1,0,0,41,41,liste1[i].X, liste1[i].Y, 32, 32);
+    }else if(type == 2){
+      ctx.drawImage(sprit2,0,0,41,41,liste1[i].X, liste1[i].Y, 32, 32);
+    }else if(type == 3){
+      ctx.drawImage(sprit3,0,0,41,41,liste1[i].X, liste1[i].Y, 32, 32);
+    }else if(type == 4){
+      ctx.drawImage(sprit4,0,0,41,41,liste1[i].X, liste1[i].Y, 32, 32);
+    }else if(type == 5){
+      ctx.drawImage(sprit5,0,0,41,41,liste1[i].X, liste1[i].Y, 32, 32);
     }
+
+    ctx.fillStyle="#01DF01";
+    ctx.fillRect(liste1[i].X, liste1[i].Y, liste2[i].vie*30, 4);
   }
 
-
-
-    //joueur 2
+  //j2
   for (var i = 0; i < liste2.length; i++) {
-    s =  liste2[i].sprites;
-    if(s < 2){
-      ctx.drawImage(sprite,0,224,32,32,liste2[i].X, liste2[i].Y, 32, 32);
-    }else if(s >=2 && s<4){
-      ctx.drawImage(sprite,32,224,32,32,liste2[i].X, liste2[i].Y, 32, 32);
-    }else if(s >= 4 && s<=6){
-      ctx.drawImage(sprite,64,224,32,32,liste2[i].X, liste2[i].Y, 32, 32);
-    }
+      type = liste2[i].type;
+      if(type == 1){
+       ctx.drawImage(sprit1,0,0,41,41,liste2[i].X, liste2[i].Y, 32, 32);
+      }else if(type == 2){
+        ctx.drawImage(sprit2,0,0,41,41,liste2[i].X, liste2[i].Y, 32, 32);
+      }else if(type == 3){
+        ctx.drawImage(sprit3,0,0,41,41,liste2[i].X, liste2[i].Y, 32, 32);
+      }else if(type == 4){
+        ctx.drawImage(sprit4,0,0,41,41,liste2[i].X, liste2[i].Y, 32, 32);
+      }else if(type == 5){
+        ctx.drawImage(sprit5,0,0,41,41,liste2[i].X, liste2[i].Y, 32, 32);
+      }
 
-   	//ctx.fillRect(liste[i].X, liste[i].Y, 10, 10);
-
+      ctx.fillStyle="#01DF01";
+      ctx.fillRect(liste2[i].X, liste2[i].Y, liste2[i].vie*30, 4);
   }
+
+     
 }
 
 function getElemById(Id,json,joueur){
@@ -261,13 +260,13 @@ function majListe(json){
   console.log("maj");
   //joueur 1
   for(var k = 0; k<json.list_joueur1.length; k++){
-    liste1[k] = new unite((json.list_joueur1[k].x-1)*41,(json.list_joueur1[k].y-1)*41,json.list_joueur1[k].id);
-    liste1[k].sprites=0;
+    liste1[k] = new unite((json.list_joueur1[k].x-1)*41,(json.list_joueur1[k].y-1)*41,json.list_joueur1[k].id,json.list_joueur1[k].type,json.list_joueur1[k].vie);
+
   }
 
    //joueur 1
   for(var k = 0; k<json.list_joueur2.length; k++){
-    liste2[k] = new unite((json.list_joueur2[k].x-1)*41,(json.list_joueur2[k].y-1)*41,json.list_joueur2[k].id);
-    liste2[k].sprites=0;
+    liste2[k] = new unite((json.list_joueur2[k].x-1)*41,(json.list_joueur2[k].y-1)*41,json.list_joueur2[k].id,json.list_joueur2[k].type,json.list_joueur2[k].vie);
+
   }
 }

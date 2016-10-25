@@ -58,6 +58,8 @@ function putGame(){
 	})
 }
 
+var premierTour = 0;
+
 function getGame(){
 	$.ajax({
 		type: "GET",
@@ -68,23 +70,27 @@ function getGame(){
 		},
 		dataType: "json",
 		success: function(json){
-			$("#log").hide();
-			$("#game").show();
 			if(premierTour == 0){
-				console.log("premier tour");
-				console.log(json);
 				premierTour++;
-				majListe(json);
-				draw();
-			}else{
-				animate(json);
-				setTimeout(function(){
-					majListe(json);
-					draw();
-					num=0;
-				}, 1000)};
-				$('#newturn').prop('disabled', false);
-				setTimeout(function(){getGame();}, 1000);
+				$("#log").hide();
+				$("#game").show();
+				$('#foot').css("margin-top","50px");
+				$("#infoo").html("Joueur 1 - "+json.player1.name+" VS "+json.player2.name+" - Joueur 2");
+			}
+			
+
+			console.log("premier tour");
+			console.log(json);
+
+			majListe(json);
+
+			console.log(json);
+			console.log(liste1);
+			console.log(liste2);
+			majManaScor(json);
+			draw();
+
+			setTimeout(function(){getGame();}, 2000);
 
 		},
 		error: function() {
