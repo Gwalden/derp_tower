@@ -1,0 +1,11 @@
+
+Ce que l'on a réussi :
+
+Réajustement des attaques, mise en "réseau" du jeu (deux comptes peuvent ce connecter et faire générer des personnages aléatoirement sur la map) le tour par tour n'est pas encore mis au point
+
+Ce que l'on a appri : 
+Rien de nouveau
+
+
+Ce que l'on va faire au prochain sprint :
+Mise en place du tour par tour, mise en place d'une singlepage afin d'exploité l'apport de Javascript

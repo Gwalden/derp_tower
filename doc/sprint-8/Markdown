@@ -1,0 +1,13 @@
+
+Ce que l'on a réussi :
+
+Animation complétée, les joueurs avancent case par case, face a face sur le plateau mais les attaques ne fonctionnent pas encore correctement.
+Génération aléatoire des personnages des deux cotés
+
+Ce que l'on a appri : 
+Gérer l'attente de requete
+mise en place correct du javascript
+
+
+Ce que l'on va faire au prochain sprint :
+Mise en place des cartes a jouer, mise en reseau du jeu
