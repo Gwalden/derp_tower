@@ -1,10 +1,11 @@
 console.log("restart from scratch");
-
+var champion=null;
 $(document).ready(function(){
   $('#game').hide();
 
   $('#hydrea').click(function(){
     hideBordersCards();
+    champion="hydrea";
     $('#infos').html("Voici le super champion hydrea");
     $('#hydrea').css("border","1px solid white");
 
@@ -12,26 +13,43 @@ $(document).ready(function(){
 
   $('#battler').click(function(){
     hideBordersCards();
+    champion="battler";
     $('#infos').html("Voici le super champion battler");
     $('#battler').css("border","1px solid white");
   });
 
   $('#derp').click(function(){
     hideBordersCards();
+    champion="derp";
     $('#infos').html("Voici le super champion derp");
     $('#derp').css("border","1px solid white");
   });
 
   $('#gorrok').click(function(){
     hideBordersCards();
+    champion="gorrok";
     $('#infos').html("Voici le super champion gorrok");
     $('#gorrok').css("border","1px solid white");
   });
 
   $('#naksian').click(function(){
     hideBordersCards();
+    champion="naksian";
     $('#infos').html("Voici le super champion naksian");
     $('#naksian').css("border","1px solid white");
+  });
+
+  $('#l').click(function(){
+    poserChamp(champion,1);
+  });
+  $('#lb').click(function(){
+    poserChamp(champion,2);
+  });
+  $('#rb').click(function(){
+    poserChamp(champion,3);
+  });
+  $('#r').click(function(){
+    poserChamp(champion,4);
   });
 
 });
@@ -44,8 +62,55 @@ function hideBordersCards(){
   $('#hydrea').css("border","0px solid white");
 }
 
+function poserChamp(champion,lane){
 
+  if(champion == null){
+     $('#infos').html("Veuillez selectionner un Champion avant de choisir votre lane !");
+  }else{
 
+    //requete
+     $.ajax({
+      url: "/v1/games",
+      contentType : 'application/json',
+      data: JSON.stringify({
+        "champ": champion,
+        "lane": lane
+      }),
+
+      type: "PUT",
+      dataType: "json",
+      beforeSend : function(req) {
+        req.setRequestHeader("Authorization", "Basic " + btoa(name + ":" + pswd));
+      },
+      success: function(json){
+        console.log(json);
+        $('#newturn').prop('disabled', true);
+        if(premierTour == 0){
+          console.log("premier tour");
+          console.log(json);
+          premierTour++;
+          majListe(json);
+          draw();
+          $('#newturn').prop('disabled', false);
+          
+        }else{
+
+          animate(json);
+
+          setTimeout(function(){
+
+            majListe(json);
+            draw();
+            num=0;
+            $('#newturn').prop('disabled', false);
+
+          }, 1000);
+        }
+      }   
+    })
+
+  }
+}
 
 //unite
 var unite = function(posX,posY,ID){this.X = posX;this.Y=posY;this.Id=ID,sprites=6}
