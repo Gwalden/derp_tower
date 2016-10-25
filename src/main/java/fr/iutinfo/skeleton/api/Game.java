@@ -19,7 +19,7 @@ public class Game {
 	private User player1;
 	private User player2;
 	private User turn;
-	private User winner;
+	private User winner=null;
 	private List<Entity> list_joueur1 = new ArrayList<>();
 	private List<Entity> list_joueur2 = new ArrayList<>();
 	final static Logger logger = LoggerFactory.getLogger(Game.class);
@@ -240,9 +240,9 @@ public class Game {
 	}
 
 	public void finDeGame() {
-		if (this.getScore1()==2) {
+		if (this.getScore1()>=5) {
 			this.winner = player1;
-		} else if (this.getScore2()==2) {
+		} else if (this.getScore2()>=5) {
 			this.winner = player2;
 		}
 	}
