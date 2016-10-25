@@ -1,17 +1,17 @@
 package fr.iutinfo.skeleton.api;
 
-public class Entity {
+public abstract class Entity {
 
-	private int id;
-	private int x;
-	private int y;
-	private int dep = 1;
-	private int att = 1;
-	private int vie = 1;
-	private int cout = 1;
-	private int rAtt = 1;
-	private int point = 1;
-	private boolean peutAttaquer = false;
+	protected int id;
+	protected int x;
+	protected int y;
+	protected int dep = 1;
+	protected int att = 1;
+	protected int vie = 1;
+	protected int cout = 1;
+	protected int rAtt = 1;
+	protected int point = 1;
+	protected boolean peutAttaquer = false;
 
 	public int getPoint() {
 		return point;
