@@ -17,7 +17,7 @@ public class Games {
 	private static List<Game>glist = new ArrayList<>();
 	private static List<User>ulist = new ArrayList<>();
 	final static Logger logger = LoggerFactory.getLogger(User.class);
-
+	private int pos;
 
 
 	@GET
@@ -55,12 +55,12 @@ public class Games {
 	}
 
 	@PUT
-	public Game playGame(@Context SecurityContext context){
+	public Game playGame(@Context SecurityContext context, Action action){
 		User u = (User) context.getUserPrincipal();
 		for (Game lgame : glist) {
 			if (lgame.getPlayer1().getName().equals(u.getName()) || lgame.getPlayer2().getName().equals(u.getName())) {
 				if (lgame.getTurn().getName().equals(u.getName()))
-					lgame.nextTurn(u);
+					lgame.nextTurn(u, action);
 				return lgame;
 			}
 		}

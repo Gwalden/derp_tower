@@ -70,64 +70,64 @@ public class Game {
 	}
 
 	
-	public void putEntityJoueur1() {
-		Random ra = new Random();
-		int r = ra.nextInt(4)+1;
-		if (r==1) {
-			Entity e = new Entity(2,3,id);
-			if (this.getMana1()-e.getCout()>=0) {
-				this.setMana1(this.getMana1()-e.getCout());
-				list_joueur1.add(e);
-			}
-		} else if (r==2) {
-			Entity e = new Entity(5,2,id);
-			if (this.getMana1()-e.getCout()>=0) {
-				this.setMana1(this.getMana1()-e.getCout());
-				list_joueur1.add(e);
-			}
-		} else if (r==3) {
-			Entity e = new Entity(6,2,id);
-			if (this.getMana1()-e.getCout()>=0) {
-				this.setMana1(this.getMana1()-e.getCout());
-				list_joueur1.add(e);
-			}
-		} else if (r==4) {
-			Entity e = new Entity(9,3,id);
-			if (this.getMana1()-e.getCout()>=0) {
-				this.setMana1(this.getMana1()-e.getCout());
-				list_joueur1.add(e);
-			}
+	public void putEntityJoueur1(int type, int r) {
+		int l =2;
+		int c = 13;
+		if (r == 2){
+			l=5;
+			c=14;
+		}
+		else if (r == 3){
+			l=6;
+			c = 14;
+		}
+		else if (r == 4)
+			l=9;	
+		Entity e;
+		if (type == 1)
+			 e = new Naksian(l,c,id);
+		else if (type == 2)
+			 e = new Battler(l,c,id);
+		else if (type == 3)
+			 e = new Derp(l,c,id);
+		else if (type == 4)
+			e = new Gorrok(l,c,id);
+		else if (type == 5)
+			 e = new Hydrea(l,c,id);
+		if (this.getMana2()-e.getCout()>=0) {
+			this.setMana1(this.getMana2()-e.getCout());
+			list_joueur1.add(e);
 		}
 		id++;
 	}
 	
-	public void putEntityJoueur2() {
-		Random ra = new Random();
-		int r = ra.nextInt(4)+1;
-		if (r==1) {
-			Entity e = new Entity(2,13,id);
-			if (this.getMana2()-e.getCout()>=0) {
-				this.setMana2(this.getMana2()-e.getCout());
-				list_joueur2.add(e);
-			}
-		} else if (r==2) {
-			Entity e = new Entity(5,14,id);
-			if (this.getMana2()-e.getCout()>=0) {
-				this.setMana2(this.getMana2()-e.getCout());
-				list_joueur2.add(e);
-			}
-		} else if (r==3) {
-			Entity e = new Entity(6,14,id);
-			if (this.getMana2()-e.getCout()>=0) {
-				this.setMana2(this.getMana2()-e.getCout());
-				list_joueur2.add(e);
-			}
-		} else if (r==4) {
-			Entity e = new Entity(9,13,id);
-			if (this.getMana2()-e.getCout()>=0) {
-				this.setMana2(this.getMana2()-e.getCout());
-				list_joueur2.add(e);
-			}
+	public void putEntityJoueur2(int type, int r) {
+		int l = 2;
+		int c = 13;
+		if (r == 2){
+			l=5;
+			c=14;
+		}
+		else if (r == 3){
+			l=6;
+			c = 14;
+		}
+		else if (r == 4)
+			l=9;	
+		Entity e;
+		if (type == 1)
+			e = new Naksian(l,c,id);
+		else if (type == 2)
+			 e = new Battler(l,c,id);
+		else if (type == 3)
+			e = new Derp(l,c,id);
+		else if (type == 4)
+			e = new Gorrok(l,c,id);
+		else if (type == 5)
+			 e = new Hydrea(l,c,id);
+		if (this.getMana2()-e.getCout()>=0) {
+			this.setMana2(this.getMana2()-e.getCout());
+			list_joueur2.add(e);
 		}
 		id++;
 	}
@@ -202,13 +202,13 @@ public class Game {
 		}
 	}
 	
-	public void nextTurn(User user) {
+	public void nextTurn(User user, Action action) {
 		this.nettoyerTroupes();
 		this.commencerCombat();
 		this.nettoyerTroupes();
 
 		if (user.getName().equals(this.player1.getName())) {
-			this.putEntityJoueur1();
+			this.putEntityJoueur1(action.getChamp(), action.getLane());
 			this.setMana2(this.getMana2()+1);
 			this.setTurn(this.player2);
 			this.deplacerEntityJoueur2();
@@ -216,7 +216,7 @@ public class Game {
 			logger.debug("Score 2 = "+score2);
 		}
 		else if (user.getName().equals(this.player2.getName())) {
-			this.putEntityJoueur2();
+			this.putEntityJoueur2(action.getChamp(), action.getLane());
 			this.setMana1(this.getMana1()+1);
 			this.setTurn(this.player1);
 			this.deplacerEntityJoueur1();
@@ -237,9 +237,9 @@ public class Game {
 	}
 
 	public void finDeGame() {
-		if (this.getScore1()==1) {
+		if (this.getScore1()==2) {
 			this.winner = player1;
-		} else if (this.getScore2()==1) {
+		} else if (this.getScore2()==2) {
 			this.winner = player2;
 		}
 	}
