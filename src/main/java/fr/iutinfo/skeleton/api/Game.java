@@ -84,7 +84,7 @@ public class Game {
 		else if (r == 4)
 			l=9;	
 		Entity e = null;
-		if (type == 1)
+		if (type == 5)
 			 e = new Naksian(l,c,id);
 		else if (type == 2)
 			 e = new Battler(l,c,id);
@@ -92,7 +92,7 @@ public class Game {
 			 e = new Derp(l,c,id);
 		else if (type == 4)
 			e = new Gorrok(l,c,id);
-		else if (type == 5)
+		else if (type == 1)
 			 e = new Hydrea(l,c,id);
 		if (this.getMana2()-e.getCout()>=0) {
 			this.setMana1(this.getMana2()-e.getCout());
@@ -115,7 +115,7 @@ public class Game {
 		else if (r == 4)
 			l=9;	
 		Entity e = null;
-		if (type == 1)
+		if (type == 5)
 			e = new Naksian(l,c,id);
 		else if (type == 2)
 			 e = new Battler(l,c,id);
@@ -123,7 +123,7 @@ public class Game {
 			e = new Derp(l,c,id);
 		else if (type == 4)
 			e = new Gorrok(l,c,id);
-		else if (type == 5)
+		else if (type == 1)
 			 e = new Hydrea(l,c,id);
 		if (this.getMana2()-e.getCout()>=0) {
 			this.setMana2(this.getMana2()-e.getCout());

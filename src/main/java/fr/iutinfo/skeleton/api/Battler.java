@@ -1,7 +1,7 @@
 package fr.iutinfo.skeleton.api;
 
 public class Battler extends Entity {
-	final int type = 6;
+	final int type = 2;
 	
 	public Battler(){
 	}

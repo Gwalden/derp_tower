@@ -1,7 +1,7 @@
 package fr.iutinfo.skeleton.api;
 
 public class Derp extends Entity {
-	final int type = 7;
+	final int type = 3;
 	
 	public Derp(){
 	}

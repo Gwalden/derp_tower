@@ -1,7 +1,7 @@
 package fr.iutinfo.skeleton.api;
 
 public class Naksian extends Entity{
-	final int type = 1;
+	final int type = 5;
 	
 	public Naksian(){
 	}

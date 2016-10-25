@@ -1,7 +1,7 @@
 package fr.iutinfo.skeleton.api;
 
 public class Hydrea extends Entity {
-	final int type = 9;
+	final int type = 1;
 	
 	public Hydrea(){
 	}
