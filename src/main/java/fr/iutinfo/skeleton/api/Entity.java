@@ -2,6 +2,15 @@ package fr.iutinfo.skeleton.api;
 
 public abstract class Entity {
 
+	public int getType() {
+		return type;
+	}
+
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
 	protected int type = 0; 
 	protected int id;
 	protected int x;
