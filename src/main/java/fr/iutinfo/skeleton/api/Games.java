@@ -3,7 +3,6 @@ package fr.iutinfo.skeleton.api;
 import java.util.List;
 import java.util.ArrayList;
 
-import javax.inject.Singleton;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -17,23 +16,26 @@ public class Games {
 
 	private static List<Game>glist = new ArrayList<>();
 	private static List<User>ulist = new ArrayList<>();
-    final static Logger logger = LoggerFactory.getLogger(User.class);
+	final static Logger logger = LoggerFactory.getLogger(User.class);
 
-	
-	
+
+
 	@GET
 	public Game getGame(@Context SecurityContext context){
 		User u = (User) context.getUserPrincipal();
 		logger.debug(u.toString());
 
-		for (Game lgame : glist) {
-			if (lgame.getPlayer1().getName().equals( u.getName()) || lgame.getPlayer2().getName().equals( u.getName()))
-				return lgame;
+		for (int i=0;i<glist.size();i++) {
+			if (glist.get(i).getPlayer1().getName().equals( u.getName()) || glist.get(i).getPlayer2().getName().equals( u.getName())) {
+				if (glist.get(i).getWinner() != null)
+					glist.remove(i);
+				return glist.get(i);
+			}
 		}
 		throw new WebApplicationException(404);
 	}
-	
-	
+
+
 	@POST
 	public void creatGame(@Context SecurityContext context){
 		User u = (User) context.getUserPrincipal();
@@ -44,21 +46,24 @@ public class Games {
 			Game gamec = new Game();
 			gamec.setPlayer1(ulist.get(0));
 			gamec.setPlayer2(ulist.get(1));
+			gamec.setTurn(ulist.get(0));
 			ulist.remove(1);
 			ulist.remove(0);
 			glist.add(gamec);
 		}
 		logger.debug("GLIST :     "+ glist.toString());
 	}
-	
+
 	@PUT
 	public Game playGame(@Context SecurityContext context){
 		User u = (User) context.getUserPrincipal();
-		Game g = null;
 		for (Game lgame : glist) {
-			if (lgame.getPlayer1().getName() == u.getName() || lgame.getPlayer2().getName() == u.getName())
-				g=lgame;
+			if (lgame.getPlayer1().getName().equals(u.getName()) || lgame.getPlayer2().getName().equals(u.getName())) {
+				if (lgame.getTurn().getName().equals(u.getName()))
+					lgame.nextTurn(u);
+				return lgame;
+			}
 		}
-		return g;
+		throw new WebApplicationException(404);
 	}
 }

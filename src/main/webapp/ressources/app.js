@@ -1,5 +1,52 @@
 console.log("restart from scratch");
 
+$(document).ready(function(){
+  $('#game').hide();
+
+  $('#hydrea').click(function(){
+    hideBordersCards();
+    $('#infos').html("Voici le super champion hydrea");
+    $('#hydrea').css("border","1px solid white");
+
+  });
+
+  $('#battler').click(function(){
+    hideBordersCards();
+    $('#infos').html("Voici le super champion battler");
+    $('#battler').css("border","1px solid white");
+  });
+
+  $('#derp').click(function(){
+    hideBordersCards();
+    $('#infos').html("Voici le super champion derp");
+    $('#derp').css("border","1px solid white");
+  });
+
+  $('#gorrok').click(function(){
+    hideBordersCards();
+    $('#infos').html("Voici le super champion gorrok");
+    $('#gorrok').css("border","1px solid white");
+  });
+
+  $('#naksian').click(function(){
+    hideBordersCards();
+    $('#infos').html("Voici le super champion naksian");
+    $('#naksian').css("border","1px solid white");
+  });
+
+});
+
+function hideBordersCards(){
+  $('#naksian').css("border","0px solid white");
+  $('#gorrok').css("border","0px solid white");
+  $('#derp').css("border","0px solid white");
+  $('#battler').css("border","0px solid white");
+  $('#hydrea').css("border","0px solid white");
+}
+
+
+
+
 //unite
 var unite = function(posX,posY,ID){this.X = posX;this.Y=posY;this.Id=ID,sprites=6}
 
@@ -25,11 +72,15 @@ $("#newturn").click(function(event){
       url: "/v1/games",
       type: "PUT",
       dataType: "json",
+      beforeSend : function(req) {
+			req.setRequestHeader("Authorization", "Basic " + btoa(name + ":" + pswd));
+		},
       success: function(json){
         console.log(json);
         $('#newturn').prop('disabled', true);
         if(premierTour == 0){
           console.log("premier tour");
+          console.log(json);
           premierTour++;
           majListe(json);
           draw();
