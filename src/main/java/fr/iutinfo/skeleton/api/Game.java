@@ -72,14 +72,14 @@ public class Game {
 	
 	public void putEntityJoueur1(int type, int r) {
 		int l =2;
-		int c = 13;
+		int c = 3;
 		if (r == 2){
 			l=5;
-			c=14;
+			c=2;
 		}
 		else if (r == 3){
 			l=6;
-			c = 14;
+			c = 2;
 		}
 		else if (r == 4)
 			l=9;	
