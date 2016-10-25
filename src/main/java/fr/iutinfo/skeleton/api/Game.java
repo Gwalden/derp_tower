@@ -83,7 +83,7 @@ public class Game {
 		}
 		else if (r == 4)
 			l=9;	
-		Entity e;
+		Entity e = null;
 		if (type == 1)
 			 e = new Naksian(l,c,id);
 		else if (type == 2)
@@ -114,7 +114,7 @@ public class Game {
 		}
 		else if (r == 4)
 			l=9;	
-		Entity e;
+		Entity e = null;
 		if (type == 1)
 			e = new Naksian(l,c,id);
 		else if (type == 2)
