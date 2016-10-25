@@ -1,5 +1,14 @@
 body{
-	background-image: url("polished-wood.png");
+	background:url('239.jpg') no-repeat ;
+	background-size: 100% 100%;
+	height:1000px;
+
+}
+
+input{
+    padding: 10px 10px;
+    margin: 4px 0;
+    box-sizing:border-box;
 }
 
 .inscription {
@@ -23,11 +32,7 @@ body{
 	position:center;
 }
 
-input{
-    padding: 10px 10px;
-    margin: 4px 0;
-    box-sizing:border-box;
-}
+
 
 .central{
 	background-color: #7E8180;
@@ -35,22 +40,20 @@ input{
 	border-radius: 20px;
 	width: 950px;
 	padding: 7px;
-	margin-left: auto;
-	margin-right: auto;
     margin-left: 21%;
     margin-right: 30%;
     margin-bottom:10px;
 	
 }
 
-.footer{
+.basPage{
+	position:absolute;
+	bottom:0px;
 	background-color: #7E8180;
 	border: 3px solid;
 	border-radius: 20px;
 	width: 950px;
 	padding: 7px;
-	margin-left: auto;
-	margin-right: auto;
     margin-left: 21%;
     margin-right: 30%;
 }
@@ -67,7 +70,7 @@ input:focus {
 }
 
 .header{
-	margin-top: 15px;
+	margin-top: 0px;
     border-radius: 10px;
 	margin-left: auto;
 	margin-right: auto;
@@ -82,8 +85,42 @@ input:focus {
 .plat{
 	background-image:url('map_verticale.png');
 	border:10px solid #2E2E2E;
+	margin:50px;
 }
 
-.bouton{
-	width:300px;
+.container{
+	border:0px solid white;
+	width:100%;
+	height:100%;
+}
+.head{
+	border-bottom:15px solid grey;
+	padding:50px;
+	color:#FFFFFF;
+
+}
+.cards{
+	height:350px;
+	margin-top:20px;
+}.cards:hover{
+	border:1px solid lightgrey;
+}
+.unite{
+	width:150px;
+	height:150px;
+	border:1px solid lightgrey;
+}
+
+.play{
+	color:lightgrey;
+	font-size:25px;
+	font-family:arial;
+}
+
+.see{
+	border:1px solid yellow;
+}
+.visu{
+	width:100%;
+	height:100%;
 }
